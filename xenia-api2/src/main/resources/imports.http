@@ -1,0 +1,15 @@
+POST http://localhost:8080/events/import
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name=file; filename="events.csv"
+Content-Type: text/csv
+
+< events.csv
+--WebAppBoundary
+
+###
+GET http://localhost:8080/events
+
+###
+GET http://localhost:8080//events/1/giveaways

@@ -1,5 +1,5 @@
 angular.module('Xenia.Dashboard')
-    .controller('DashboardCtrl', function(Event){
+    .controller('DashboardCtrl', function($scope, Event, fileUpload,XENIA_API_URL){
         var dashboard = this;
 
         dashboard.events = [];
@@ -23,5 +23,15 @@ angular.module('Xenia.Dashboard')
             });
         };
 
+        dashboard.fileUpload = function (){
+            var file = $scope.evensModel;
+            var uploadUrl=XENIA_API_URL+"/events/import";
+            fileUpload.uploadFileToUrl(file,uploadUrl);
+        };
+
+        dashboard.importEvents = function(){
+            $scope.evensModel=null;
+            $("#eventsImportModal").modal("show");
+        }
         dashboard.init();
     });

@@ -1,5 +1,6 @@
 package pl.jug.torun.xenia.draw
 
+import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.util.Assert
 import org.springframework.web.bind.annotation.*
@@ -9,6 +10,7 @@ import pl.jug.torun.xenia.prizes.PrizeRepository
 import javax.validation.Valid
 import javax.validation.constraints.Min
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/events/{id}/giveaways", produces = "application/json")
 class GiveAwayController {
@@ -33,12 +35,17 @@ class GiveAwayController {
     public List<GiveAway> prizesQueue(@PathVariable("id") Event event) {
         List<GiveAway> giveAways = giveAwayRepository.findAllByEvent(event)
         List<DrawResult> results = drawResultRepository.findAllByEvent(event)
-
+        println "Test "+giveAways
+        println "draw "+results
         giveAways = giveAways.collect { [it] * it.amount }.flatten()
+        println "Test2 "+giveAways
+
 
         results.collect { it.giveAway }.each {
             int index = giveAways.indexOf(it)
+            println "Index "+index
             if (index >= 0) {
+                println "Remove"
                 giveAways.remove(index)
             }
         }

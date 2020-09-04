@@ -26,6 +26,7 @@ angular.module('Xenia.Event')
                 event.prizes = result.data;
             });
 
+
             event.getGiveaways();
         };
 
@@ -65,6 +66,8 @@ angular.module('Xenia.Event')
                 event.refreshingAttendees = false;
             });
         };
+
+
 
         event.openCreateGiveawayModal = function() {
             event.giveaway = {
