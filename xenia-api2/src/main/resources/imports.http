@@ -13,3 +13,14 @@ GET http://localhost:8080/events
 
 ###
 GET http://localhost:8080//events/1/giveaways
+
+###
+POST http://localhost:8080/events/10/attendees/import
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name=file; filename="events.csv"
+Content-Type: text/csv
+
+< attendees.csv
+--WebAppBoundary

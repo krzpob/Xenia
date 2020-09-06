@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.hibernate.annotations.Type
 import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormatter
 import org.springframework.data.jpa.repository.JpaRepository
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -34,6 +35,11 @@ class Event {
             return event
         }
     }
+
+    override fun toString(): String {
+        return "Event(id=$id, name=$name, startDateTime=$startDateTime)"
+    }
+
 
 }
 

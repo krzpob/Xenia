@@ -14,6 +14,7 @@ class Member{
 
     var name: String?=null
     var email: String?=null
+    var profileUrl: String?=null
 }
 
 interface MemberRepository: JpaRepository<Member, Long>{

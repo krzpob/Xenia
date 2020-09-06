@@ -36,6 +36,11 @@ class GiveAway {
         this.emailRequired=emailRequired
     }
 
+    override fun toString(): String {
+        return "GiveAway(id=$id, prize=$prize, event=$event, amount=$amount, emailRequired=$emailRequired)"
+    }
+
+
 }
 
 interface GiveAwayRepository: JpaRepository<GiveAway, Long>{

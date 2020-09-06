@@ -20,13 +20,15 @@ class AttendeeController(
     fun listAll(@PathVariable id: Long):List<Attendee> = attendeeRepository.findAllByEventId(id)
 
     @PostMapping("/import")
-    fun import(@RequestParam("file") file: MultipartFile):List<Attendee>{
+    fun import(@PathVariable id: Long,@RequestParam("file") file: MultipartFile):List<Attendee>{
         val reader = csvReader{
             charset="UTF-8"
+            skipEmptyLine =true
+            delimiter=';'
         }
         var attendeeList = emptyList<Attendee>()
-        reader.open(file.resource.file){
-            attendeeList = attendeeService.import(readAllAsSequence())
+        reader.open(file.resource.inputStream){
+            attendeeList = attendeeService.import(id,readAllAsSequence())
         }
         return attendeeList
     }

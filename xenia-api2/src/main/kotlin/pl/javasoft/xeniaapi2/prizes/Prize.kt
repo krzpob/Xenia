@@ -25,6 +25,11 @@ class Prize {
 
     @ColumnDefault("false")
     var inactive: Boolean=false
+    override fun toString(): String {
+        return "Prize(id=$id, name=$name, imageUrl=$imageUrl, inactive=$inactive)"
+    }
+
+
 }
 
 interface PrizeRepository: JpaRepository<Prize, Long>{

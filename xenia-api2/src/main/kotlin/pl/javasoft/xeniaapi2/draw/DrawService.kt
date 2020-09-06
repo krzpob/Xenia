@@ -28,7 +28,7 @@ class DrawService(
 
     @Transactional
     fun drawWinnerCandidate(giveAway: GiveAway): DrawResult{
-        Assert.isNull(giveAway.event!!.id, "Event must have id")
+        log.info("GiveWay: {}", giveAway)
         Assert.state(giveAway.amount> drawResultRepository.countAllByGiveAway(giveAway),"You cannot draw more giveaways for this prize!")
         val attendeeList = attendeeRepository.findAllPresentMembersAtTheEvent(giveAway.event?.id!!)
         Assert.state(attendeeList.isNotEmpty(),"No one attended this event, you cannot draw a giveaway")
