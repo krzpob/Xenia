@@ -24,13 +24,14 @@ angular.module('Xenia.Dashboard')
         };
 
         dashboard.fileUpload = function (){
-            var file = $scope.evensModel;
+            var file = $scope.eventsModel;
+            console.log("scope: "); console.log($scope);
             var uploadUrl=XENIA_API_URL+"/events/import";
             fileUpload.uploadFileToUrl(file,uploadUrl);
         };
 
         dashboard.importEvents = function(){
-            $scope.evensModel=null;
+            $scope.eventsModel=null;
             $("#eventsImportModal").modal("show");
         }
         dashboard.init();

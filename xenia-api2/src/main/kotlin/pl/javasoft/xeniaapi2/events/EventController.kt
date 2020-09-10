@@ -34,6 +34,7 @@ class EventController (private val eventRepository: EventRepository){
     fun import(@RequestParam("file")file: MultipartFile):List<Event>{
         val reader = csvReader { charset="UTF-8" }
         val eventList = mutableListOf<Event>()
+        eventRepository.deleteAll();
         reader.open(file.resource.inputStream){
             readAllAsSequence().forEach {
                 log.info("Load row: ${it[0]},${it[1]},${DateTime.parse(it[1])}")

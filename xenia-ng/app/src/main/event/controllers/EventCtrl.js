@@ -67,7 +67,12 @@ angular.module('Xenia.Event')
             });
         };
 
-
+        event.fileUpload = function (){
+            var file = $scope.eventsModel;
+            console.log("scope: "); console.log($scope);
+            var uploadUrl=XENIA_API_URL+"/events/import";
+            fileUpload.uploadFileToUrl(file,uploadUrl);
+        };
 
         event.openCreateGiveawayModal = function() {
             event.giveaway = {
