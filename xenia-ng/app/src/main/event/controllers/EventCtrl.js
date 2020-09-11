@@ -1,5 +1,5 @@
 angular.module('Xenia.Event')
-    .controller('EventCtrl', function(XENIA_API_URL, $routeParams, $scope, Event, Attendee, Giveaway, Prize){
+    .controller('EventCtrl', function(XENIA_API_URL, $routeParams, $scope, Event, Attendee, Giveaway, Prize,fileUpload){
         var event = this;
 
         event.details = {};
@@ -68,10 +68,23 @@ angular.module('Xenia.Event')
         };
 
         event.fileUpload = function (){
-            var file = $scope.eventsModel;
-            console.log("scope: "); console.log($scope);
-            var uploadUrl=XENIA_API_URL+"/events/import";
+            var file = $scope.attendeesModel;
+
+            if(file==null){
+                alert("Nie wybranu pliku!");
+                return;
+            }
+            var uploadUrl=XENIA_API_URL+"/events/"+$routeParams.id+"/attendees/import";
             fileUpload.uploadFileToUrl(file,uploadUrl);
+            $("#attendeeImportModal").modal("hide");
+            Attendee.listAll($routeParams.id).then(function(result){
+                event.attendees = result.data;
+            });
+        };
+
+        event.importAttendee = function (){
+            $scope.attendeesModel=null;
+            $("#attendeeImportModal").modal("show");
         };
 
         event.openCreateGiveawayModal = function() {

@@ -4,7 +4,7 @@
         <span class="label label-warning btn-lg">{{dashboard.events.length}}</span>
     </div>
     <div class="col-sm-2 text-right" style="z-index:1">
-        <p><button class="btn btn-success palette-orange positioned-right" ng-click="dashboard.refreshEvents()" ng-disabled="dashboard.isRefreshing"><span class="glyphicon-refresh glyphicon"></span></button></p>
+<!--        <p><button class="btn btn-success palette-orange positioned-right" ng-click="dashboard.refreshEvents()" ng-disabled="dashboard.isRefreshing"><span class="glyphicon-refresh glyphicon"></span></button></p>-->
         <p><button class="btn btn-success palette-orange positioned-right" ng-click="dashboard.importEvents()" ><span class="glyphicon-arrow-up glyphicon"></span></button></p>
     </div>
 </div>
@@ -30,7 +30,12 @@
 
 <div id="eventsImportModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
+
         <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Import events</h4>
+            </div>
             <div class="modal-body">
                 <div class="clearfix">
                     <input type="file" file-model = "eventsModel">

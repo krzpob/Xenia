@@ -25,9 +25,15 @@ angular.module('Xenia.Dashboard')
 
         dashboard.fileUpload = function (){
             var file = $scope.eventsModel;
+            if(file==null){
+                alert("Nie wybranu pliku!");
+                return;
+            }
             console.log("scope: "); console.log($scope);
             var uploadUrl=XENIA_API_URL+"/events/import";
             fileUpload.uploadFileToUrl(file,uploadUrl);
+            $("#eventsImportModal").modal("hide");
+            dashboard.getEvents();
         };
 
         dashboard.importEvents = function(){
