@@ -12,5 +12,9 @@ angular.module('Xenia.Common')
 
         model.findById = function(id) {
             return $http.get(XENIA_API_URL + "/events/" + id);
-        }
+        };
+
+        model.create = function(event){
+            return $http.post(XENIA_API_URL + "/events/",event);
+        };
     });

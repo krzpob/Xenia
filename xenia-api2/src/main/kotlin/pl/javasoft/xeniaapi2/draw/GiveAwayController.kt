@@ -1,5 +1,7 @@
 package pl.javasoft.xeniaapi2.draw
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -21,6 +23,8 @@ import javax.validation.constraints.Min
 @RestController
 class GiveAwayController(private val giveAwayRepository: GiveAwayRepository,private val prizeRepository: PrizeRepository, private val drawResultRepository: DrawResultRepository,private val eventRepository: EventRepository) {
 
+    val log:Logger = LoggerFactory.getLogger(GiveAwayController::class.java)
+
     @GetMapping
     fun listAll(@PathVariable("id") eventId: Long) = giveAwayRepository.findAllByEventId(eventId)
 
@@ -28,15 +32,19 @@ class GiveAwayController(private val giveAwayRepository: GiveAwayRepository,priv
     fun prizesQueue(@PathVariable("id") eventId: Long): MutableList<GiveAway> {
         var giveAways = mutableListOf(*giveAwayRepository.findAllByEventId(eventId).toTypedArray())
         val drawResults = drawResultRepository.findAllByEvent(eventId)
-
+        log.info("Podarunki: {}", giveAways)
+        log.info("Wygrani: {}", drawResults)
         giveAways = giveAways.flatMap { g-> List(g.amount){g} }.toMutableList()
+        log.info("Podarunki2: {}", giveAways)
         drawResults.map { it.giveAway }.forEach {
             val index = giveAways.indexOf(it)
-            if(index>0){
+            log.info("Index: {}", index)
+            log.info("Poadrek wygrany: {}", it)
+            if(index>=0){
                 giveAways.removeAt(index)
             }
         }
-
+        log.info("Podarunki3: {}", giveAways)
         return giveAways
     }
 
@@ -56,7 +64,6 @@ class GiveAwayController(private val giveAwayRepository: GiveAwayRepository,priv
 
     @PutMapping("/{giveaway}")
     fun update(@PathVariable("id")eventId: Long, @PathVariable("giveaway") giveAwayId: Long,@Valid @RequestBody updateGiveAwayRequest: UpdateGiveAwayRequest):GiveAway{
-        val event:Event = eventRepository.findById(eventId).orElseThrow()
 
         val giveAway = giveAwayRepository.getOne(giveAwayId)
         giveAway.amount=updateGiveAwayRequest.amount

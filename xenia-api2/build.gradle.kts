@@ -26,6 +26,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("com.github.debop:koda-time:2.0.0")
     implementation("joda-time:joda-time:2.10")
+    implementation("commons-io:commons-io:2.8.0")
     implementation("org.springdoc:springdoc-openapi-ui:1.4.6")
     implementation(group="org.jadira.usertype", name= "usertype.core", version= "6.0.1.GA")
     implementation("com.github.doyaaaaaken:kotlin-csv-jvm:0.10.4")

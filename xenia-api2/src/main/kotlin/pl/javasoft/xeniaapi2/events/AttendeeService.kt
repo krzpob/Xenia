@@ -7,7 +7,7 @@ import pl.javasoft.xeniaapi2.members.MemberRepository
 @Service
 class AttendeeService(private val memberRepository: MemberRepository,
                       private val eventRepository: EventRepository,
-                      private val attendeeRepository: AttendeeRepository
+                       private val attendeeRepository: AttendeeRepository
 ) {
 
     fun import(id:Long, attendee: Sequence<List<String>>):List<Attendee>{

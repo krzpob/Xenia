@@ -28,6 +28,12 @@ class DrawResult {
         this.giveAway=giveAway
         this.member=member
     }
+
+    override fun toString(): String {
+        return "DrawResult(id=$id, giveAway=$giveAway, member=$member)"
+    }
+
+
 }
 
 interface DrawResultRepository: JpaRepository<DrawResult, Long>{

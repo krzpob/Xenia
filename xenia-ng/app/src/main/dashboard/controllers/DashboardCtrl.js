@@ -15,6 +15,25 @@ angular.module('Xenia.Dashboard')
             });
         };
 
+        dashboard.clearForm = function (){
+            dashboard.editingEvent={};
+        };
+
+        dashboard.addNewEvent = function(){
+            dashboard.clearForm();
+            $("#eventModal").modal("show");
+        };
+
+        dashboard.createEvent = function (){
+            dashboard.isRefreshing = true;
+            Event.create(dashboard.editingEvent)
+                .then(function (){
+                    dashboard.getEvents();
+                    dashboard.isRefreshing=false;
+                    $("#eventModal").modal("hide");
+                });
+        }
+
         dashboard.refreshEvents = function() {
             dashboard.isRefreshing = true;
             Event.refreshAll().then(function(){
