@@ -22,7 +22,19 @@ class AttendeeService(private val memberRepository: MemberRepository,
             }
             member = memberRepository.save(member)
             Attendee(event,member)
-        }.toList()
+        }.toList().distinct()
         return attendeeRepository.saveAll(attendeeList)
+    }
+
+    fun create(id: Long, attendeeRequestCreate: AttendeeRequestCreate) {
+        val member = Member().apply {
+            name=attendeeRequestCreate.name
+            email=attendeeRequestCreate.email
+            profileUrl=attendeeRequestCreate.profileUrl
+        }
+
+        val attendee = Attendee(eventRepository.getOne(id),memberRepository.save(member))
+        attendeeRepository.saveAndFlush(attendee)
+
     }
 }

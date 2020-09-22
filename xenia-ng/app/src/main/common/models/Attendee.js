@@ -9,4 +9,8 @@ angular.module('Xenia.Common')
         model.refreshAll = function(id) {
             return $http.post(XENIA_API_URL + "/events/" + id + "/attendees/refresh", {});
         };
+
+        model.create = function(id, member){
+            return $http.post(XENIA_API_URL + "/events/" + id + "/attendees", member);
+        };
     });

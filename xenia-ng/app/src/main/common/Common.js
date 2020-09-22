@@ -24,8 +24,9 @@ common.service('fileUpload',['$http', function ($http){
         $http.post(uploadUrl,fd,{
             transformRequest: [],
             headers: {'Content-Type': undefined}
-        }).then(function() {
+        }).then(function(response) {
             console.log("Success");
+            return response.data;
         }).catch(function() {
         });
     }

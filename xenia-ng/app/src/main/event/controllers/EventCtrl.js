@@ -4,6 +4,7 @@ angular.module('Xenia.Event')
 
         event.details = {};
         event.attendees = [];
+        event.attendee={};
         event.prizes = [];
         event.giveaways = [];
         event.prizesQueue = [];
@@ -68,6 +69,7 @@ angular.module('Xenia.Event')
         };
 
         event.fileUpload = function (){
+            event.refreshingAttendees = true;
             var file = $scope.attendeesModel;
 
             if(file==null){
@@ -75,17 +77,30 @@ angular.module('Xenia.Event')
                 return;
             }
             var uploadUrl=XENIA_API_URL+"/events/"+$routeParams.id+"/attendees/import";
-            fileUpload.uploadFileToUrl(file,uploadUrl);
+            var list=fileUpload.uploadFileToUrl(file,uploadUrl);
             $("#attendeeImportModal").modal("hide");
-            Attendee.listAll($routeParams.id).then(function(result){
-                event.attendees = result.data;
-            });
+            event.attendees = list;
+            event.refreshingAttendees = false;
+            window.location.reload(true);
+
         };
 
         event.importAttendee = function (){
             $scope.attendeesModel=null;
             $("#attendeeImportModal").modal("show");
         };
+
+        event.createAttendee = function(){
+            Attendee.create($routeParams.id, event.attendee).then(function (result){
+                $("#attendeeImportModal").modal("hide");
+                window.location.reload(true);
+            });
+        }
+
+        event.showCreateDialog = function(){
+            $scope.event.attendee={};
+            $("#attendeeModel").modal("show")
+        }
 
         event.openCreateGiveawayModal = function() {
             event.giveaway = {

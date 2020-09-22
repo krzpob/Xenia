@@ -2,7 +2,7 @@
 
 <div class="row">
     <!-- LEFT COLUMN -->
-    <div class="col-md-9">
+    <div class="col-md-8">
 
         <div class="draw-area" ng-show="event.canDrawGiveaway()">
             <p class="text-center">Currently drawing</p>
@@ -58,9 +58,9 @@
 
     </div>
     <!-- RIGHT COLUMN -->
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <h4 class="subtitle">Attendees <span class="label label-warning">{{event.attendees.length}}</span></h4>
             </div>
 <!--            <div class="col-md-2 text-right">-->
@@ -70,7 +70,11 @@
 <!--                    <span class="glyphicon glyphicon-refresh"></span>-->
 <!--                </button>-->
 <!--            </div>-->
-            <div class="col-md-2 text-right">
+            <div class="col-md-2 text-right"><span>
+                <button class="btn btn-success positioned-right" ng-click="event.showCreateDialog()"><span class="glyphicon-plus glyphicon"></span></button>
+                    </span>
+            </div>
+            <div class="col-md-2 text-right"><span>
                 <button class="btn btn-success palette-orange positioned-right" ng-click="event.importAttendee()" >
                     <span class="glyphicon-arrow-up glyphicon"></span></button>
             </div>
@@ -138,8 +142,43 @@
             <div class="modal-body">
                 <div class="clearfix">
                     <input class="fileinput" type="file" file-model = "attendeesModel">
-                    <button name="Import" ng-click="event.fileUpload()" class="palette-orange btn-default">Import</button>
+
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button name="Import" ng-click="event.fileUpload()" class="palette-orange btn btn-primary">Import</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="attendeeModel" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Attendee</h4>
+            </div>
+            <div class="modal-body">
+                <div class="clearfix">
+                    <form class="form" role="form">
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <input type="text" id="name" name="name" ng-model="event.attendee.name" placeholder="name of attendee" ng-required="true">
+                            </div>
+                            <div class="col-sm-10" >
+                                <input type="url" id="profileUrl" name="profileUrl" ng-model="event.attendee.profileUrl" placeholder="profile url">
+                            </div>
+                            <div class="col-sm-10" >
+                                <input type="email" id="email" name="email" ng-model="event.attendee.email" placeholder="Email">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="event.createAttendee()">Create</button>
             </div>
         </div>
     </div>
