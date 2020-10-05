@@ -1,5 +1,5 @@
 angular.module('Xenia.Dashboard')
-    .controller('DashboardCtrl', function($scope, Event, fileUpload,XENIA_API_URL){
+    .controller('DashboardCtrl', function($scope, Event, fileUpload,XENIA_API_URL, MEETUP){
         var dashboard = this;
 
         dashboard.events = [];
@@ -7,6 +7,7 @@ angular.module('Xenia.Dashboard')
 
         dashboard.init = function() {
             dashboard.getEvents();
+            dashboard.meetup=MEETUP;
         };
 
         dashboard.getEvents = function() {

@@ -1,5 +1,5 @@
 angular.module('Xenia.Event')
-    .controller('EventCtrl', function(XENIA_API_URL, $routeParams, $scope, Event, Attendee, Giveaway, Prize,fileUpload){
+    .controller('EventCtrl', function(XENIA_API_URL, $routeParams, $scope, Event, Attendee, Giveaway, Prize,fileUpload,MEETUP){
         var event = this;
 
         event.details = {};
@@ -11,7 +11,7 @@ angular.module('Xenia.Event')
         event.winner = {};
         event.winners = {};
         event.avatarPlaceholder = 'http://img2.meetupstatic.com/img/458386242735519287330/noPhoto_50.png';
-
+        event.meetup=MEETUP;
         event.giveaway = {};
 
         event.init = function() {

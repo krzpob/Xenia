@@ -9,6 +9,7 @@
     "angular-bootstrap": "~2.0.0",
     "jquery": "1.10.2",
     "flat-ui": "~2.3.x",
-    "headjs": "~1.0.3"
+    "headjs": "~1.0.3",
+    "github-fork-ribbon": "^0.2.3"
   }
 }

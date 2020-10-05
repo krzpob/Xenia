@@ -5,8 +5,8 @@
         <button class="btn btn-primary btn-group-sm label" ng-click="dashboard.addNewEvent()"><span class="glyphicon glyphicon-plus"></span></button>
     </div>
     <div class="col-sm-2 text-right" style="z-index:1">
-<!--        <p><button class="btn btn-success palette-orange positioned-right" ng-click="dashboard.refreshEvents()" ng-disabled="dashboard.isRefreshing"><span class="glyphicon-refresh glyphicon"></span></button></p>-->
-        <p><button class="btn btn-success palette-orange positioned-right" ng-click="dashboard.importEvents()" ><span class="glyphicon-arrow-up glyphicon"></span></button></p>
+        <p ng-if="dashboard.meetup"><button class="btn btn-success palette-orange positioned-right" ng-click="dashboard.refreshEvents()" ng-disabled="dashboard.isRefreshing"><span class="glyphicon-refresh glyphicon"></span></button></p>
+        <p ng-if="!dashboard.meetup"><button class="btn btn-success palette-orange positioned-right" ng-click="dashboard.importEvents()" ><span class="glyphicon-arrow-up glyphicon"></span></button></p>
     </div>
 </div>
 

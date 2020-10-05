@@ -63,18 +63,18 @@
             <div class="col-md-8">
                 <h4 class="subtitle">Attendees <span class="label label-warning">{{event.attendees.length}}</span></h4>
             </div>
-<!--            <div class="col-md-2 text-right">-->
-<!--                <button class="btn btn-success btn-sm positioned-right palette-orange"-->
-<!--                        ng-disabled="event.refreshingAttendees"-->
-<!--                        ng-click="event.refreshAttendees()">-->
-<!--                    <span class="glyphicon glyphicon-refresh"></span>-->
-<!--                </button>-->
-<!--            </div>-->
-            <div class="col-md-2 text-right"><span>
+            <div ng-if="event.meetup" class="col-md-2 text-right">
+                <button class="btn btn-success btn-sm positioned-right palette-orange"
+                        ng-disabled="event.refreshingAttendees"
+                        ng-click="event.refreshAttendees()">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                </button>
+            </div>
+            <div ng-if="!event.meetup" class="col-md-2 text-right"><span>
                 <button class="btn btn-success positioned-right" ng-click="event.showCreateDialog()"><span class="glyphicon-plus glyphicon"></span></button>
                     </span>
             </div>
-            <div class="col-md-2 text-right"><span>
+            <div ng-if="!event.meetup" class="col-md-2 text-right"><span>
                 <button class="btn btn-success palette-orange positioned-right" ng-click="event.importAttendee()" >
                     <span class="glyphicon-arrow-up glyphicon"></span></button>
             </div>

@@ -9,7 +9,7 @@ var xenia = angular.module('xenia', [
 ]);
 
 xenia.value('XENIA_API_URL', 'http://localhost:8080');
-
+xenia.value('MEETUP', false);
 xenia.config(function($routeProvider, $httpProvider) {
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
