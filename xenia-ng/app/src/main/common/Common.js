@@ -15,6 +15,12 @@ common.directive("fileModel",['$parse',function ($parse){
     };
 }]);
 common.service('fileUpload',['$http', function ($http){
+    var common=this;
+
+
+
+
+
     this.uploadFileToUrl=function(file, uploadUrl){
         var fd = new FormData();
         console.log("File: ");
@@ -31,3 +37,4 @@ common.service('fileUpload',['$http', function ($http){
         });
     }
 }]);
+

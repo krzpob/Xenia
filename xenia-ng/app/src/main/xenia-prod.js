@@ -5,11 +5,10 @@ var xenia = angular.module('xenia', [
     'Xenia.Navigation',
     'Xenia.Event',
     'Xenia.Prize',
-    'Xenia.Dashboard',
-    'Xenia.GoogleAuth'
+    'Xenia.Dashboard'
 ]);
 
-xenia.value('XENIA_API_URL', 'http://localhost:8080');
+xenia.value('XENIA_API_URL', 'https://xenia-agile-ng-api.herokuapp.com');
 xenia.value('MEETUP', false);
 xenia.config(function($routeProvider, $httpProvider) {
     $httpProvider.defaults.useXDomain = true;
@@ -35,21 +34,3 @@ xenia.config(function($routeProvider, $httpProvider) {
             redirectTo: '/dashboard'
         });
 });
-
-
-
-function signOut(){
-    console.log('logout...');
-
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-        angular.element($('#google-logged')).controller().logout();
-    });
-
-}
-function signIn(){
-    var auth2 = gapi.auth2.getAuthInstance()    ;
-    auth2.signIn().then(function (){
-        angular.element($('#google-logged')).controller().logged();
-    })
-}

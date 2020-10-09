@@ -3,16 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Xenia</title>
-
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="757877772690-ehv072c622o4ktoa0k83tijaj2ja3lt9.apps.googleusercontent.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/flat-ui/dist/css/flat-ui.css" />
     <link rel="stylesheet" href="assets/css/agile-4u-style.css" />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
 
 </head>
 <body>
-    <div class="main-section">
+
+<script>
+    function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
+
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+        $("#google-logged").val("true");
+        angular.element($('#google-logged')).controller().logged();
+
+
+    }
+    // Vmr8yws6yv4zp5Dx4UVPPgnO
+
+</script>
+<div ng-controller="googleAuthCtr">
+    <input type="hidden"  id="google-logged" name="googleLogged" value="false" >
+</div>
+
+<div class="main-section">
         <nav class="navbar" role="navigation" ng-controller="NavigationCtrl as nav">
             <div class="container">
                 <div class="navbar-header">
@@ -23,10 +53,18 @@
                     <ul class="nav navbar-nav">
                         <li ng-class="{ active: nav.isActive('/dashboard')}"><a href="#/dashboard">Events</a></li>
                         <li ng-class="{ active: nav.isActive('/prizes')}"><a href="#/prizes">Prizes</a></li>
-
+                        <li id="signout" ng-if="logged" class="active"><a href="#/" onclick="signOut()">Sign out</a>
+                        </li>
+                        <li> <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div></li>
                     </ul>
+
+
+
+
+
                  </div>
                 <!-- /.navbar-collapse -->
+
             </div>
             <!-- /.container-fluid -->
         </nav>

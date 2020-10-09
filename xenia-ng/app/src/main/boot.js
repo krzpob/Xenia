@@ -19,5 +19,6 @@ head.load(
     { file: "src/main/event/controllers/EventCtrl.js" },
     { file: "src/main/prize/Prize.js" },
     { file: "src/main/prize/controllers/PrizeCtrl.js" },
+    { file: "src/main/GoogleCtrl.js"},
     { file: "src/main/xenia.js" }
 );

@@ -12,7 +12,7 @@ plugins {
 
 
 group = "pl.javasoft"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.2-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
@@ -53,16 +53,21 @@ tasks.withType<KotlinCompile> {
 }
 
 jib {
+    from {
+        image = "adoptopenjdk/openjdk11:jre11u-alpine-nightly"
+    }
     to {
         image = "krzpob/xenia-api"
         tags = setOf("$version","latest" )
-        auth {
-            username = System.getenv("DOCKERHUB_USERNAME")
-            password = System.getenv("DOCKERHUB_PASSWORD")
-        }
+//        auth {
+//            username = System.getenv("DOCKERHUB_USERNAME")
+//            password = System.getenv("DOCKERHUB_PASSWORD")
+//        }
     }
     container{
         ports = listOf("8080")
+        jvmFlags = listOf("-Dserver.port=\$PORT")
+        environment = mapOf(Pair("PORT","8080"))
     }
 }
 

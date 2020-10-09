@@ -7,7 +7,7 @@
   },
   "scripts": {
     "test": "karma start --single-run --browsers Chrome app/tests/karma.conf.js",
-    "postinstall": "bower install",
+    "postinstall": "bower install --allow-root",
     "prestart": "npm install",
     "start": "http-server -a 0.0.0.0 -p 8000 -c-1"
   },

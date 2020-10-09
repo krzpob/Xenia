@@ -1,14 +1,35 @@
+
+
 angular.module('Xenia.Dashboard')
-    .controller('DashboardCtrl', function($scope, Event, fileUpload,XENIA_API_URL, MEETUP){
+    .controller('DashboardCtrl', function($scope, Event, fileUpload,XENIA_API_URL, MEETUP,$rootScope){
         var dashboard = this;
 
         dashboard.events = [];
         dashboard.isRefreshing = false;
 
         dashboard.init = function() {
-            dashboard.getEvents();
+
+            if($rootScope.logged) {
+                dashboard.getEvents();
+            }
             dashboard.meetup=MEETUP;
         };
+        var counter=0;
+        $rootScope.$watch('logged', function (n,o){
+            console.log("change no "+counter++);
+
+            console.log(o+"->"+n);
+
+            if(n){
+                dashboard.init();
+                $('.g-signin2').hide();
+            } else {
+                $('.g-signin2').show();
+            }
+
+
+
+        });
 
         dashboard.getEvents = function() {
             Event.listAll().then(function(result){
