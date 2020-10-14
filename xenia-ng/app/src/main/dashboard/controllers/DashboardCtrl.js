@@ -9,27 +9,27 @@ angular.module('Xenia.Dashboard')
 
         dashboard.init = function() {
 
-            if($rootScope.logged) {
+
                 dashboard.getEvents();
-            }
+
             dashboard.meetup=MEETUP;
         };
-        var counter=0;
-        $rootScope.$watch('logged', function (n,o){
-            console.log("change no "+counter++);
+        // var counter=0;
+        // $rootScope.$watch('logged', function (n,o){
+        //     console.log("change no "+counter++);
+        //
+        //     console.log(o+"->"+n);
+        //
+        //     if(n){
+        //         dashboard.init();
+        //         $('.g-signin2').hide();
+        //     } else {
+        //         $('.g-signin2').show();
+        //     }
 
-            console.log(o+"->"+n);
-
-            if(n){
-                dashboard.init();
-                $('.g-signin2').hide();
-            } else {
-                $('.g-signin2').show();
-            }
 
 
-
-        });
+        // });
 
         dashboard.getEvents = function() {
             Event.listAll().then(function(result){

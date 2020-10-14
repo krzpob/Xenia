@@ -35,6 +35,7 @@ dependencies {
     implementation(group="org.jadira.usertype", name= "usertype.core", version= "6.0.1.GA")
     implementation("com.github.doyaaaaaken:kotlin-csv-jvm:0.10.4")
     implementation(group="com.fasterxml.jackson.datatype", name="jackson-datatype-joda")
+    implementation(group= "org.postgresql", name= "postgresql", version="9.4.1212")
     runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
@@ -58,7 +59,7 @@ jib {
     }
     to {
         image = "krzpob/xenia-api"
-        tags = setOf("$version","latest" )
+        tags = setOf("$version","latest")
 //        auth {
 //            username = System.getenv("DOCKERHUB_USERNAME")
 //            password = System.getenv("DOCKERHUB_PASSWORD")

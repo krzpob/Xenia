@@ -2,16 +2,16 @@ angular.module("Xenia.GoogleAuth", ['Xenia.Common']).controller("googleAuthCtr",
     var googleAuth = this;
 
     $rootScope.logged=false;
-    this.logged=function(){
-        $rootScope.logged=true;
-        console.log("logged");
-        $rootScope.$digest();
-    };
-
-    this.logout=function (){
-        console.log("logout");
-        $rootScope.logged=false;
-        $rootScope.$digest();
-    };
+    // this.logged=function(){
+    //     $rootScope.logged=true;
+    //     console.log("logged");
+    //     $rootScope.$digest();
+    // };
+    //
+    // this.logout=function (){
+    //     console.log("logout");
+    //     $rootScope.logged=false;
+    //     $rootScope.$digest();
+    // };
 
 });

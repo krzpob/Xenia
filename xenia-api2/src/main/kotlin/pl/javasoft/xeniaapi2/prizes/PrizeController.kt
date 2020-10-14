@@ -1,15 +1,24 @@
 package pl.javasoft.xeniaapi2.prizes
 
 import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.web.bind.annotation.RequestMethod.GET
+import org.springframework.web.bind.annotation.RequestMethod.POST
+import org.springframework.web.bind.annotation.RequestMethod.PUT
 import org.springframework.web.bind.annotation.RestController
 import javax.websocket.server.PathParam
 
+@CrossOrigin(
+        origins = ["https://xenia-agile-ng.herokuapp.com","localhost:8000"]
+
+)
 @RestController
 @RequestMapping(produces = [MediaType.APPLICATION_JSON_VALUE], value = ["/prizes"])
 class PrizeController(private val prizeRepository: PrizeRepository) {

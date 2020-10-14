@@ -3,6 +3,7 @@ package pl.javasoft.xeniaapi2.draw
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -19,6 +20,7 @@ import javax.validation.Valid
 import javax.validation.constraints.Max
 import javax.validation.constraints.Min
 
+@CrossOrigin(origins = ["https://xenia-agile-ng.herokuapp.com","http://localhost:8080"])
 @RequestMapping(value = ["/events/{id}/giveaways"], produces = [MediaType.APPLICATION_JSON_VALUE])
 @RestController
 class GiveAwayController(private val giveAwayRepository: GiveAwayRepository,private val prizeRepository: PrizeRepository, private val drawResultRepository: DrawResultRepository,private val eventRepository: EventRepository) {

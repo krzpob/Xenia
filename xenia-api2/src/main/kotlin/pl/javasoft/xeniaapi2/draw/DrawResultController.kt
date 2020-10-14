@@ -2,6 +2,7 @@ package pl.javasoft.xeniaapi2.draw
 
 import org.apache.commons.io.IOUtils
 import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -10,6 +11,7 @@ import java.io.ByteArrayInputStream
 import java.nio.charset.Charset
 import javax.servlet.http.HttpServletResponse
 
+@CrossOrigin(origins = ["https://xenia-agile-ng.herokuapp.com","http://localhost:8080"])
 @RequestMapping(value = ["/events/{id}/giveaways/result"], produces = [MediaType.APPLICATION_JSON_VALUE])
 @RestController
 class DrawResultController(private val drawResultRepository: DrawResultRepository) {
@@ -27,12 +29,12 @@ class DrawResultController(private val drawResultRepository: DrawResultRepositor
     @GetMapping(value = ["/csv"], produces = [MediaType.APPLICATION_OCTET_STREAM_VALUE])
     fun downloadCsv(@PathVariable("id")eventId: Long, httpServletResponse: HttpServletResponse){
         val drawResult = drawResultRepository.findAllByEvent(eventId)
-        var csv = "\"Member ID\",\"Won prize\",\"Member name\",\"Member e-mail\"\n"
+        var csv = "\"Member ID\",\"Won prize\",\"Member name\",\"Member profile\"\n"
         csv+=drawResult.map { String.format("%d,\"%s\",\"%s\",\"%s\"",
                         it.member?.id,
                         it.giveAway?.prize?.name?.replace(oldChar = '"', newChar = '\''),
                         it.member?.name?.replace(oldChar = '"', newChar = '\''),
-                        it.member?.email?.replace(oldChar = '"', newChar = '\'')?:""
+                        it.member?.profileUrl?.replace(oldChar = '"', newChar = '\'')?:""
                     ) }.joinToString("\n")
         val fileName="Meetup-${eventId}-draw-results.csv"
         httpServletResponse.contentType="text/csv"

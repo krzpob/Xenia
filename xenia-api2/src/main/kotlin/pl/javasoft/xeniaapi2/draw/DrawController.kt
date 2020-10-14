@@ -1,6 +1,7 @@
 package pl.javasoft.xeniaapi2.draw
 
 import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 import pl.javasoft.xeniaapi2.events.EventRepository
 import pl.javasoft.xeniaapi2.members.MemberRepository
 
+@CrossOrigin(origins = ["https://xenia-agile-ng.herokuapp.com","http://localhost:8080"])
 @RestController
 @RequestMapping(value = ["/events/{id}/giveaways/{giveAway}/draw"], produces = [MediaType.APPLICATION_JSON_VALUE])
 class DrawController(private val drawService: DrawService,
